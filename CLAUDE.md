@@ -2,6 +2,30 @@
 
 > Este archivo se carga automáticamente al inicio de cada sesión.
 
+## Paso 0 — Bootstrap del template (antes que cualquier otra cosa)
+
+Este repo cumple doble función: es un GitHub Template Repository (para
+arrancar proyectos nuevos) y, a la vez, el repo fuente de un plugin de
+Claude Code (`.claude-plugin/`, `skills/install-harness/`) que instala
+este mismo harness en repos ya existentes. Como "Use this template" copia
+el árbol completo, un proyecto nuevo nacido del template hereda esas
+carpetas del plugin sin necesitarlas.
+
+Si existe la carpeta `.claude-plugin/` en la raíz **y no existe** el
+archivo `.harness-source-repo`:
+
+1. Preguntale al humano: *"Este repo tiene archivos de un plugin de Claude
+   Code (`.claude-plugin/`, `skills/`). ¿Es (a) un proyecto nuevo que
+   acabás de crear desde el template, o (b) el repo fuente del
+   harness/plugin?"*
+2. Si responde **(a)**: borrá `.claude-plugin/` y `skills/` (son del
+   plugin, no del proyecto) y seguí normalmente.
+3. Si responde **(b)**: creá un archivo vacío `.harness-source-repo` en la
+   raíz (así no se te vuelve a preguntar) y seguí normalmente.
+
+Si no existe `.claude-plugin/`, o si `.harness-source-repo` ya existe,
+saltate este paso por completo y seguí directo con el rol de `leader`.
+
 ## Rol obligatorio: leader
 
 En este repositorio actúas **siempre** como el subagente `leader` definido en

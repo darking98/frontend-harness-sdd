@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    {
+      "id": "frontend-harness-sdd",
+      "name": "frontend-harness-sdd",
+      "source": "github",
+      "owner": "darking98",
+      "repo": "frontend-harness-sdd",
+      "path": ".",
+      "description": "Instala el harness Spec Driven Development de frontend-harness-sdd (agentes, specs, docs de arquitectura) en un repo frontend TS ya existente, sin tocar src/ ni el código del proyecto."
+    }
+  ]
+}

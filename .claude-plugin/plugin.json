@@ -1,0 +1,5 @@
+{
+  "name": "frontend-harness-sdd",
+  "description": "Instala el harness Spec Driven Development de frontend-harness-sdd (agentes, specs, docs de arquitectura) en un repo frontend TS ya existente, sin tocar src/ ni el código del proyecto.",
+  "version": "1.0.0"
+}
