@@ -1,0 +1,28 @@
+{
+  "project": "<nombre-del-proyecto>",
+  "description": "<Completar: qué hace este proyecto, una línea>",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"],
+    "sdd_required_when": "feature has \"sdd\": true"
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "input-with-validation",
+      "title": "Input con validación de formularios",
+      "description": "Primitiva ui/input.tsx (presentacional pura) y su envoltorio components/forms/input-with-validation.tsx con react-hook-form, para reusar en cualquier formulario de la app.",
+      "acceptance": [
+        "Existe ui/input.tsx: label + input + mensaje de error, sin lógica de validación",
+        "Existe components/forms/input-with-validation.tsx que envuelve ui/input.tsx con useController de react-hook-form",
+        "Al tipear, el valor se refleja en el estado del form sin delay perceptible",
+        "Al enviar el form con el campo vacío, se bloquea el submit y se muestra el mensaje de error debajo del input",
+        "Hay tests que montan un useForm real (no mockeado) y verifican ambos casos"
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
+}
