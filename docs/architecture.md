@@ -109,7 +109,7 @@ usuario → app/<ruta> (route del router)
 
 ## Ejemplo — primitivo reusable vs. específico de dominio
 
-`ui/input.tsx` (nivel de app) es la primitiva visual pura. `components/forms/input-with-validation.tsx` (nivel de app, **no** dentro de
+`ui/inputs/input.tsx` (nivel de app) es la primitiva visual pura. `components/forms/input-with-validation.tsx` (nivel de app, **no** dentro de
 `modules/<dominio>/`) la envuelve con `useController` de react-hook-form —
 vive a nivel de app porque cualquier módulo con formularios lo va a
 necesitar, no hace falta esperar un segundo consumidor real para

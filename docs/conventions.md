@@ -48,7 +48,7 @@ estilo inline porque las clases no reciben un valor animado.
 
 `ui/` es la primitiva de diseño — puramente visual, sin lógica de negocio
 ni de formularios. `components/` implementa un componente de `ui/`
-sumándole lógica (ej. `ui/input.tsx` → `components/forms/input-with-validation.tsx`
+sumándole lógica (ej. `ui/inputs/input.tsx` → `components/forms/input-with-validation.tsx`
 con react-hook-form). Mismo principio en cualquier módulo o a nivel de app.
 
 - **Nada suelto directo en `ui/` o `components/`**: todo componente va en

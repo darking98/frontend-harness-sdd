@@ -96,7 +96,7 @@ menos un `R<n>` que cubre.
 Ejemplo:
 
 ```markdown
-- [ ] T1 — Crear `ui/input.tsx` (primitiva presentacional). Cubre: R1.
+- [ ] T1 — Crear `ui/inputs/input.tsx` (primitiva presentacional). Cubre: R1.
 - [ ] T2 — Crear `components/forms/input-with-validation.tsx` usando
       `useController` de react-hook-form. Cubre: R1, R2.
 - [ ] T3 — Test `input-with-validation.test.tsx`: montar un `useForm` real
