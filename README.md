@@ -13,6 +13,16 @@
 | **3. Spec Driven Development** | `docs/specs.md`, EARS notation, puerta de aprobación humana en `spec_ready` |
 | **4. Supervisión y mejora** | `CHECKPOINTS.md`, hooks en `.claude/settings.json` |
 
+## Instalarlo como plugin en un repo existente
+
+```
+/plugin install frontend-harness-sdd --marketplace darking98/frontend-harness-sdd
+```
+
+(Requiere Claude Code 2.1.275 o posterior; funciona en un solo paso aunque
+todavía no hayas agregado el marketplace.) Para el camino de proyecto
+nuevo desde cero, ver "Al forkear este template" más abajo.
+
 ## Para empezar
 
 ```bash

@@ -1,5 +1,6 @@
 {
   "name": "frontend-harness-sdd",
+  "description": "Marketplace personal de darking98 — harness SDD para proyectos frontend TS (Next.js/Vite).",
   "owner": {
     "name": "darking98",
     "url": "https://github.com/darking98"
