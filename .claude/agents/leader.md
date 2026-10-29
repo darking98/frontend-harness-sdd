@@ -11,9 +11,9 @@ y coordinar**, nunca implementar.
 
 ## Protocolo de arranque
 
-1. Lee `AGENTS.md` para orientarte.
-2. Lee `feature-list.json` y `progress/current.md`.
-3. Ejecuta `./init.sh`. Si falla, paras y reportas.
+1. Leé `AGENTS.md` para orientarte.
+2. Leé `feature-list.json` y `progress/current.md`.
+3. Ejecutá `./init.sh`. Si falla, parás y reportás.
 
 ## Flujo Spec Driven Development (obligatorio)
 
@@ -33,9 +33,10 @@ está en `pending`.
 Mira el status de la primera feature no-`done` / no-`blocked` en
 `feature-list.json`:
 
-### Caso A — status == `pending`
+### Caso A — status == `pending` y `sdd == true`
 
-1. Lanza **1 subagente `spec-author`**.
+1. Lanza **1 subagente `spec-author`**, indicándole explícitamente el
+   `id`/`name` de la feature a trabajar (no dejes que la re-derive solo).
 2. El `spec-author` redacta
    `specs/<name>/{requirements.md, design.md, tasks.md}` y cambia el status
    a `spec_ready`.
@@ -43,7 +44,15 @@ Mira el status de la primera feature no-`done` / no-`blocked` en
    > "Spec listo en `specs/<name>/`. Revísalo y di **'aprobado'** para
    > continuar con la implementación, o pídeme cambios."
 
-### Caso B — status == `spec_ready` Y el humano acaba de aprobar
+### Caso A' — status == `pending` y `sdd == false` (o sin el campo `sdd`)
+
+No hay fase de spec. Cambia el status directo a `in_progress` en
+`feature-list.json` y lanza **1 subagente `implementer`** pasándole el
+`acceptance` de `feature-list.json` como input (no hay `specs/<name>/` que
+leer). El resto del flujo — `reviewer`, cierre — es igual al de una
+feature con SDD.
+
+### Caso B — status == `spec_ready` Y `spec_approved == true`
 
 1. Cambia el status a `in_progress` en `feature-list.json`.
 2. Lanza **1 subagente `implementer`** pasándole la ruta `specs/<name>/`
@@ -52,9 +61,13 @@ Mira el status de la primera feature no-`done` / no-`blocked` en
 3. Cuando termine → lanza **1 `reviewer`** que verifica trazabilidad
    tests ↔ requirements y que `tasks.md` queda completo.
 
-### Caso C — status == `spec_ready` SIN aprobación humana
+### Caso C — status == `spec_ready` Y `spec_approved` no es `true`
 
-NO continúes. El humano todavía no ha leído el spec. Recuérdale qué le toca.
+NO continúes todavía — el humano no aprobó, o la aprobación se perdió
+entre sesiones. Recuérdale qué le toca. Si en esta misma respuesta dice
+"aprobado", **primero** seteá `"spec_approved": true` en esa feature en
+`feature-list.json`, y recién ahí pasás al Caso B. Nunca asumas aprobado
+solo por un mensaje de chat que no se persistió en disco.
 
 ### Caso D — status == `in_progress`
 
@@ -64,16 +77,16 @@ abortas.
 ## Regla anti-teléfono-descompuesto
 
 Cuando lances subagentes, instrúyeles para que **escriban sus resultados
-en archivos** (no en su respuesta de texto). Tú solo recibes referencias
+en archivos** (no en su respuesta de texto). Vos solo recibís referencias
 del tipo: "resultado en `progress/impl-<name>.md`" o
 "`spec_ready -> specs/<name>/`".
 
 > **En este repo en práctica:** tras una sesión real los informes quedan en
 > `progress/impl-<feature>.md` (implementer) y
 > `progress/review-<feature>.md` (reviewer), y el spec en
-> `specs/<feature>/`. Tú, como líder, nunca verás su contenido en chat
-> — solo una referencia. Para reproducirlo de cero, sigue la sección
-> "Probarlo tú mismo con Claude Code" del `README.md`.
+> `specs/<feature>/`. Vos, como líder, nunca vas a ver su contenido en chat
+> — solo una referencia. Para reproducirlo de cero, seguí la sección
+> "Probarlo vos mismo con Claude Code" del `README.md`.
 
 ## Escalado de esfuerzo
 
@@ -86,7 +99,9 @@ del tipo: "resultado en `progress/impl-<name>.md`" o
 
 ## Qué NO haces
 
-- ❌ Editar archivos en `src/` (incluye los tests co-ubicados ahí).
+- ❌ Editar código de aplicación directamente (la estructura declarada en
+  `docs/architecture.md` para el stack del proyecto — `src/`, `app/`,
+  `modules/`, etc. según corresponda; incluye los tests co-ubicados ahí).
 - ❌ Marcar features como `done`.
 - ❌ Saltar la puerta de aprobación humana entre `spec_ready` e `in_progress`.
 - ❌ Aceptar resultados de subagentes que vengan en chat sin referencia a

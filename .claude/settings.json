@@ -1,14 +1,25 @@
 {
-  "$schema_comment": "Hooks que automatizan la verificación. El harness los ejecuta, no el agente, así que no se pueden saltar.",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre-tool-use-guard.sh",
+            "description": "Bloquea ediciones de código de aplicación (exit 2) si no hay ninguna feature en in_progress en feature-list.json."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -f pnpm-lock.yaml ]; then PM=pnpm; elif [ -f yarn.lock ]; then PM=yarn; else PM=npm; fi; \"$PM\" test 2>&1 | tail -20",
-            "description": "Tras editar o escribir archivos, corre los tests (detectando pnpm/yarn/npm por lockfile) y muestra el resumen."
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/post-tool-use-test.sh",
+            "description": "Si se editó código (.ts/.tsx/.js/.jsx), corre los tests; si fallan, exit 2 para que el modelo reciba el resumen por stderr."
           }
         ]
       }
@@ -18,8 +29,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./init.sh > /tmp/harness_init.log 2>&1 && echo '[harness] init.sh OK' || (echo '[harness] init.sh FALLÓ — revisa /tmp/harness_init.log antes de cerrar' && cat /tmp/harness_init.log | tail -20)",
-            "description": "Antes de cerrar la sesión, fuerza una verificación completa."
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-check.sh",
+            "description": "Dispara al final de cada respuesta del asistente (no solo al cerrar sesión). Si hay cambios de código sin verificar, corre init.sh; si falla, exit 2 para forzar que Claude siga. Evita loops chequeando stop_hook_active."
           }
         ]
       }
@@ -29,11 +40,11 @@
     "allow": [
       "Bash(./init.sh)",
       "Bash(npm test*)",
-      "Bash(npm install*)",
+      "Bash(npm install)",
       "Bash(pnpm test*)",
-      "Bash(pnpm install*)",
+      "Bash(pnpm install)",
       "Bash(yarn test*)",
-      "Bash(yarn install*)"
+      "Bash(yarn install)"
     ]
   }
 }

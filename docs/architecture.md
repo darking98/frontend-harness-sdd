@@ -35,7 +35,7 @@
    antes de tocar datos — aunque el form ya valide client-side.
 4. **No introducir dependencias ni capas nuevas** (state manager global,
    ORM, librería de UI nueva) sin una razón concreta documentada en
-   `feature-list.json`.
+   `progress/current.md`.
 
 ## Estructura — Next.js (App Router)
 
@@ -129,4 +129,4 @@ necesite exactamente ese mismo formato.
 - No crear una carpeta `screens/` separada — el componente que la ruta
   renderiza vive en `modules/<dominio>/components/`.
 - No agregar un sistema de estado global ni config nuevo sin documentarlo
-  primero en `feature-list.json`.
+  primero en `progress/current.md`.

@@ -23,9 +23,10 @@
 
 ## C3 — El código respeta la arquitectura
 
-- [ ] `src/` solo contiene los módulos previstos en `docs/architecture.md`.
+- [ ] El código de aplicación solo contiene los módulos/carpetas previstos
+      en `docs/architecture.md` para el stack del proyecto.
 - [ ] No se agregaron dependencias a `package.json` sin justificar en
-      `docs/architecture.md` o `progress/current.md`.
+      `progress/current.md`.
 - [ ] No hay `console.log` sueltos para debug, ni `any` sin justificar,
       ni TODOs sin contexto.
 
@@ -52,7 +53,8 @@
 - [ ] Toda feature `done` con `"sdd": true` tiene todas sus tasks marcadas
       `[x]` en `tasks.md`.
 - [ ] Cada `R<n>` de `requirements.md` está cubierto por al menos un test
-      concreto en `tests/`.
+      concreto co-ubicado junto al código que verifica (ver
+      `docs/verification.md`).
 
 ---
 

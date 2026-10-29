@@ -40,6 +40,15 @@ el `implementer`.
 pending → [spec-author] → spec_ready → ⏸ HUMANO → in_progress → [implementer → reviewer] → done
 ```
 
+### Persistencia de la aprobación
+
+La aprobación nunca vive solo en el chat. En el momento en que el humano
+dice "aprobado", el `leader` setea `"spec_approved": true` en esa feature
+dentro de `feature-list.json` **antes** de hacer cualquier otra cosa — así
+sobrevive a un reinicio de sesión o a una compactación de contexto. El
+`leader` distingue `spec_ready` aprobado de `spec_ready` sin aprobar
+leyendo ese campo, nunca releyendo el historial de chat.
+
 ## requirements.md — EARS estricto
 
 Las requirements se redactan en **EARS** (Easy Approach to Requirements

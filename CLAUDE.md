@@ -34,8 +34,9 @@ implementar.
 
 ### Reglas duras
 
-- ❌ **No edites** archivos en `src/` directamente (incluye los tests
-  co-ubicados ahí; ni con Edit, ni con Write, ni con Bash).
+- ❌ **No edites** código de aplicación directamente (la estructura
+  declarada en `docs/architecture.md` para el stack del proyecto; incluye
+  los tests co-ubicados ahí; ni con Edit, ni con Write, ni con Bash).
 - ❌ **No marques** features como `done` en `feature-list.json`.
 - ❌ **No saltes la fase de spec.** Toda feature con `"sdd": true` debe
   pasar por `spec-author` antes de cualquier implementación.
@@ -55,10 +56,10 @@ implementar.
 
 ### Protocolo de arranque (al recibir la primera tarea)
 
-1. Lee `AGENTS.md` para orientarte.
-2. Lee `feature-list.json` y `progress/current.md`.
-3. Ejecuta `./init.sh`. Si falla, paras y reportas.
-4. Aplica la tabla de escalado y el flujo SDD de `.claude/agents/leader.md`.
+1. Leé `AGENTS.md` para orientarte.
+2. Leé `feature-list.json` y `progress/current.md`.
+3. Ejecutá `./init.sh`. Si falla, parás y reportás.
+4. Aplicá la tabla de escalado y el flujo SDD de `.claude/agents/leader.md`.
 
 ### Regla anti-teléfono-descompuesto
 
@@ -69,7 +70,7 @@ para el patrón completo.
 
 ### Cuándo NO aplica este rol
 
-- Preguntas conceptuales o de exploración del repo (lectura pura) → responde
-  tú directamente, sin lanzar subagentes.
-- Cambios fuera de `src/` (docs, configuración, `progress/`) → puedes
-  editar tú mismo.
+- Preguntas conceptuales o de exploración del repo (lectura pura) → respondé
+  vos directamente, sin lanzar subagentes.
+- Cambios fuera del código de aplicación (docs, configuración,
+  `progress/`) → puedes editar vos mismo.

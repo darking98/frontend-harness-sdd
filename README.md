@@ -22,14 +22,14 @@
 Si todo está verde, abre `AGENTS.md` y sigue desde ahí.
 
 > Hasta que este template no tenga un `package.json` real de un proyecto
-> Vite/Next/Nest inicializado, `init.sh` no va a terminar completamente
+> Vite/Next.js inicializado, `init.sh` no va a terminar completamente
 > verde (le falta `node_modules` y un script `test`) — es esperable en un
 > template sin app todavía, no un error.
 
 ## Al forkear este template a un proyecto real
 
-1. Inicializar el proyecto TS elegido (Vite, Next.js o Nest) con su propio
-   `package.json`.
+1. Inicializar el proyecto TS elegido (Vite o Next.js) con su propio
+   `package.json` — este harness todavía no cubre backend/NestJS.
 2. Completar "Módulos de este proyecto" en `docs/architecture.md` y borrar
    la sección de stack (Next.js o Vite) que no aplique.
 3. Reemplazar `project`/`description` en `feature-list.json`.
@@ -56,7 +56,7 @@ Lo que ocurre, en dos fases:
 `specs/<feature>/{requirements.md, design.md, tasks.md}` y deja la feature
 en `spec_ready`. Luego **para y te pide aprobación**.
 
-Tú lees los tres archivos en tu editor:
+Vos leés los tres archivos en tu editor:
 
 - `requirements.md` — qué debe hacer la feature, en EARS estricto.
 - `design.md` — decisiones técnicas antes de escribir código.
@@ -113,8 +113,9 @@ vive en disco y queda versionado.
     └── settings.json      # Hooks que automatizan la verificación
 ```
 
-`src/` y `tests/` aparecen una vez que se forkea el template a un proyecto
-real con código de aplicación.
+El código de aplicación (`src/`, `app/`, `modules/`, etc. según el stack)
+aparece una vez que se forkea el template a un proyecto real — los tests
+van co-ubicados ahí, no en una carpeta `tests/` aparte.
 
 ## Aprendizajes que ilustra este template
 

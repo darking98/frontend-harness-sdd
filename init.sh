@@ -27,7 +27,8 @@ if ! command -v node >/dev/null 2>&1; then
 fi
 ok "node -> $(node --version)"
 
-# Versión mínima 18 (requerida por Next.js 14+ / Nest 10+ / Vite 5+)
+# Versión mínima 18 (requerida por Next.js 14+ / Vite 5+). Este harness
+# todavía no cubre backend/NestJS.
 NODE_VERSION_OK=$(node -e 'console.log(Number(process.versions.node.split(".")[0]) >= 18 ? 1 : 0)')
 if [ "$NODE_VERSION_OK" != "1" ]; then
   fail "Se requiere Node >= 18"
@@ -107,6 +108,11 @@ try {
           );
         }
       }
+    }
+    if (f.sdd && (f.status === "in_progress" || f.status === "done") && f.spec_approved !== true) {
+      specErrors.push(
+        `feature ${f.id} (${f.name}) en ${f.status} sin "spec_approved": true`
+      );
     }
   }
 

@@ -18,23 +18,23 @@ Eres un implementador. Tu trabajo es ejecutar **una sola** feature de
 
 ## Protocolo
 
-1. **Lee** `AGENTS.md`, `docs/architecture.md`, `docs/conventions.md`,
+1. **Leé** `AGENTS.md`, `docs/architecture.md`, `docs/conventions.md`,
    `docs/specs.md`.
-2. **Lee el spec completo** en `specs/<name>/`. Cada `T<n>` de `tasks.md`
+2. **Leé el spec completo** en `specs/<name>/`. Cada `T<n>` de `tasks.md`
    es lo que vas a hacer; cada `R<n>` de `requirements.md` es lo que debe
    quedar verdadero al final.
-3. **Anota** en `progress/current.md`:
+3. **Anotá** en `progress/current.md`:
    - `Feature en curso: <id> — <name>`
    - `Plan: las tasks T1..Tn de specs/<name>/tasks.md`
 4. **Para cada task `T<n>` en orden**:
    a. Implementa el cambio que indica la task.
    b. Si la task incluye un test, escríbelo.
    c. Marca `[x] T<n>` en `tasks.md`.
-5. **Verifica** ejecutando `./init.sh`. Si falla → vuelve al paso 4.
+5. **Verificá** ejecutando `./init.sh`. Si falla → volvé al paso 4.
 6. **Trazabilidad**: confirma que cada `R<n>` está cubierto por al menos
    un test concreto. Anótalo en `progress/impl-<name>.md`
    (mapa `R<n> → test`).
-7. **No marques `done` tú mismo.** Espera al reviewer.
+7. **No marques `done` vos mismo.** Esperá al reviewer.
 8. Si el reviewer aprueba (te lo dirá el leader en una segunda invocación):
    cambias estado a `done` y mueves el resumen a `progress/history.md`.
 

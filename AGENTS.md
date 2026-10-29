@@ -8,12 +8,12 @@
 
 ## 1. Antes de empezar (obligatorio)
 
-1. Ejecuta `./init.sh` y verifica que termina sin errores. Si falla, **para**
-   y resuelve el entorno antes de tocar código.
-2. Lee `progress/current.md` para entender en qué estado quedó la última sesión.
-3. Lee `feature-list.json`. Toda feature nueva (`"sdd": true`) pasa por
+1. Ejecutá `./init.sh` y verificá que termina sin errores. Si falla, **parás**
+   y resolvés el entorno antes de tocar código.
+2. Leé `progress/current.md` para entender en qué estado quedó la última sesión.
+3. Leé `feature-list.json`. Toda feature nueva (`"sdd": true`) pasa por
    **Spec Driven Development** — ver `docs/specs.md` y §4 de este archivo.
-4. Lee `docs/specs.md` antes de tocar cualquier spec o feature `sdd: true`.
+4. Leé `docs/specs.md` antes de tocar cualquier spec o feature `sdd: true`.
 
 ## 2. Mapa del repositorio
 
@@ -29,8 +29,7 @@
 | `docs/verification.md`       | Cómo verificar que tu trabajo funciona (incluye trazabilidad requirements)  | Antes de declarar una tarea como `done` |
 | `CHECKPOINTS.md`             | Criterios objetivos de "estado final correcto"                              | Para auto-evaluarte |
 | `.claude/agents/`            | Definiciones de subagentes (`leader`, `spec-author`, `implementer`, `reviewer`) | Si orquestas trabajo |
-| `src/`                       | Código de la aplicación                                                     | Para implementar |
-| `tests/`                     | Tests automáticos                                                           | Para verificar |
+| Código de la app (`src/`, `app/`, `modules/`, etc. según el stack) | Implementación; los tests van co-ubicados ahí, no en una carpeta `tests/` aparte | Para implementar/verificar |
 
 ## 3. Reglas duras (no negociables)
 
@@ -51,24 +50,31 @@
 pending → [spec-author] → spec_ready → ⏸ HUMANO → in_progress → [implementer → reviewer] → done
 ```
 
-1. El leader detecta la primera feature `pending` con `"sdd": true`.
+1. El leader detecta la primera feature `pending`. Si tiene `"sdd": true`
+   pasa por spec; si es `"sdd": false` (o no tiene el campo), salta directo
+   a `in_progress` + `implementer` (ver `.claude/agents/leader.md`, Caso A').
 2. El leader lanza `spec-author`, que crea
    `specs/<name>/{requirements,design,tasks}.md` y marca el status como
    `spec_ready`.
-3. **Pausa.** El humano lee el spec en `specs/<name>/` y aprueba (o pide cambios).
-4. Una vez aprobado, el leader cambia el status a `in_progress` y lanza `implementer`.
+3. **Pausa.** El humano lee el spec en `specs/<name>/` y aprueba (o pide
+   cambios). Cuando aprueba, el leader persiste `"spec_approved": true` en
+   `feature-list.json` de inmediato — la aprobación nunca vive solo en el
+   chat (ver `docs/specs.md`).
+4. Una vez aprobado (y persistido), el leader cambia el status a
+   `in_progress` y lanza `implementer`.
 5. El implementer ejecuta `tasks.md` una a una, marcándolas `[x]`.
 6. El reviewer verifica trazabilidad `R<n>` ↔ test y tasks completas;
    aprueba o rechaza.
-7. Si aprueba, el implementer marca `done` y mueve el resumen a
-   `progress/history.md`.
+7. Si aprueba, **el implementer** (nunca el leader) marca `done` y mueve
+   el resumen a `progress/history.md`.
 
 ## 5. Cierre de sesión (lifecycle)
 
 Antes de terminar:
 
-1. Ejecuta `./init.sh` — todo verde.
-2. Si la tarea está acabada: marca `status: "done"` en `feature-list.json`.
+1. Ejecutá `./init.sh` — todo verde.
+2. Si el `reviewer` aprobó: el **implementer** marca `status: "done"` en
+   `feature-list.json` (nunca el leader — ver `.claude/agents/leader.md`).
 3. Mueve el resumen de `progress/current.md` al final de `progress/history.md`.
 4. Vacía `progress/current.md` dejando solo la plantilla.
 5. No dejes archivos temporales, ni `print()` de debug, ni TODOs sin contexto.

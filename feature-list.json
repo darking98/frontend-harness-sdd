@@ -22,7 +22,8 @@
         "Hay tests que montan un useForm real (no mockeado) y verifican ambos casos"
       ],
       "sdd": true,
-      "status": "pending"
+      "status": "pending",
+      "spec_approved": false
     }
   ]
 }

@@ -11,7 +11,7 @@ cambios. No editas código.
 
 ## Protocolo
 
-1. Lee `docs/architecture.md`, `docs/conventions.md`, `docs/specs.md`,
+1. Leé `docs/architecture.md`, `docs/conventions.md`, `docs/specs.md`,
    `CHECKPOINTS.md`.
 2. Identifica la feature en curso (la única en `in_progress` en
    `feature-list.json`) y abre su carpeta `specs/<name>/`.
@@ -26,7 +26,7 @@ cambios. No editas código.
    - ¿Respeta `docs/architecture.md`? (capas, dependencias, estructura)
    - ¿Respeta `docs/conventions.md`? (estilo, nombres, errores)
    - ¿Tiene su test correspondiente?
-6. Ejecuta `./init.sh`. Tiene que terminar verde.
+6. Ejecutá `./init.sh`. Tiene que terminar verde.
 7. Recorre `CHECKPOINTS.md`. Marca `[x]` los que se cumplen, `[ ]` los que no.
 8. Emite veredicto.
 
